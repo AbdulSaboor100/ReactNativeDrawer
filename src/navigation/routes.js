@@ -49,6 +49,9 @@ function App() {
   },[])
   return (
     <NavigationContainer>
+      {/* <Stack.Navigator>
+        <Stack.Screen name="logout" component={Login} />
+      </Stack.Navigator> */}
       <Drawer.Navigator>
       {
         userData ? (
@@ -70,6 +73,7 @@ function App() {
              <>
                 <Drawer.Screen name="branchManager" component={BranchManager} />
                 <Drawer.Screen name="logout" component={Logout} />
+                
              </>
             
            )
@@ -78,7 +82,7 @@ function App() {
           </>
         ) : (
           <>
-            <Drawer.Screen name="Login" component={MainLogin} />
+            <Drawer.Screen name="Login"  component={MainLogin} />
             <Drawer.Screen name="Sign-up" component={SignUpPublic} />
           </>
         )
@@ -90,3 +94,4 @@ function App() {
 }
 
 export default App;
+

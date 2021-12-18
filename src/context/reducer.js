@@ -43,6 +43,12 @@ export function reducer(state, action) {
                 approvedApplication : action.payload
             }
         }
+        case "STATE_CHANGES": {
+            return {
+                ...state,
+                stateChange : action.payload
+            }
+        }
 
         default:
             return state;

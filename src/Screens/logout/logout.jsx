@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View , Text, StyleSheet , TouchableOpacity } from 'react-native';
 import { auth, signOut } from '../../configs/firebase';
+import { GlobalContext } from '../../context/context';
 
 const Logout = ({navigation}) => {
+    let {state , dispatch} = useContext(GlobalContext);
     const logoutFunc = async () =>{
         try {
             await signOut(auth)
+            dispatch({type : "STATE_CHANGES" , payload : {accept : true}})
             navigation.navigate("Login")
         } catch (error) {
             console.log(error , "error")
