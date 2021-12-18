@@ -1,15 +1,23 @@
 import React, { useContext, useState } from 'react';
 import { View , Text , StyleSheet ,TextInput , TouchableOpacity} from 'react-native';
 import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
+import { auth  ,signInWithEmailAndPassword} from '../../configs/firebase';
 
-const MainLogin = () => {
+const MainLogin = ({navigation}) => {
     let [fontsLoaded] = useFonts({
         Inter_900Black,
       });
     let [email , setEmail] = useState('');
     let [password , setPassword] = useState('');
-    function loginFunc(){
-        console.log({email , password})
+    async function loginFunc(){
+        try {
+            let {user} = await signInWithEmailAndPassword(auth,email ,password)
+            if(user){
+                navigation.navigate("home")
+            }
+        } catch (error) {
+            console.log("error : " , error)
+        }
     }
     return (
         <View style={styles.container}>
@@ -17,7 +25,7 @@ const MainLogin = () => {
                 <TextInput placeholder="Email" style={styles.input} value={email} onChangeText={(e)=>{setEmail(e)}}  />
             </View>
             <View style={styles.view2}>
-                <TextInput placeholder="Password" style={styles.input} value={password} onChangeText={(e)=>{setPassword(e)}}  />
+                <TextInput placeholder="Password" secureTextEntry={true} style={styles.input} value={password} onChangeText={(e)=>{setPassword(e)}}  />
             </View>
             <View style={styles.btnDiv}>
                 <TouchableOpacity style={styles.touchableBtn} onPress={loginFunc}><Text style={{color:"white"}}>Log in</Text></TouchableOpacity>

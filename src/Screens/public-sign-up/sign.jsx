@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View , Text , StyleSheet ,TextInput , TouchableOpacity} from 'react-native';
 import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
+import { auth , createUserWithEmailAndPassword ,db ,setDoc, doc } from '../../configs/firebase';
 
-const SignUpPublic = () => {
+const SignUpPublic = ({navigation}) => {
     let [fontsLoaded] = useFonts({
         Inter_900Black,
       });
@@ -10,8 +11,28 @@ const SignUpPublic = () => {
     let [password , setPassword] = useState('');
     let [age , setAge] = useState('');
     let [name , setName] = useState('');
-    function signUpFunc(){
-        console.log({email , password})
+    async function signUpFunc(){
+        try {
+            let {user} = await createUserWithEmailAndPassword(auth, email , password)
+            if(user){
+                let userObj = {
+                    name,
+                    age,
+                    email : user.email,
+                    uid : user.uid,
+                    createdat : user.uid,
+                    role : "public"
+
+                }
+                let dataRef = doc(db , "users" , user.uid)
+                let savedData = await setDoc(dataRef, userObj) 
+                navigation.navigate("home")
+
+            }
+        } catch (error) {
+            console.log("error : " , error)
+        }
+        
     }
     return (
         <View style={styles.container}>
@@ -25,7 +46,7 @@ const SignUpPublic = () => {
                 <TextInput placeholder="age" style={styles.input} value={age} onChangeText={(e)=>{setAge(e)}}  />
             </View>
             <View style={styles.view4}>
-                <TextInput placeholder="Password" style={styles.input} value={password} onChangeText={(e)=>{setPassword(e)}}  />
+                <TextInput placeholder="Password" secureTextEntry={true} style={styles.input} value={password} onChangeText={(e)=>{setPassword(e)}}  />
             </View>
             <View style={styles.btnDiv}>
                 <TouchableOpacity style={styles.touchableBtn} onPress={signUpFunc}><Text style={{color:"white"}}>Sign in</Text></TouchableOpacity>
