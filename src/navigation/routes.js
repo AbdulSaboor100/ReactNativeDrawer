@@ -43,6 +43,7 @@ function App() {
         }
         setUserData(user)
       }else{
+        setUserData('')
         console.log("user not found")
       }
     })
