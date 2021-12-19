@@ -53,8 +53,9 @@ const SignUpPublic = ({navigation}) => {
         <View style={styles.view2}>
             <TextInput placeholder="Password" secureTextEntry={true} style={styles.input} value={password} onChangeText={(e)=>{setPassword(e)}}  />
         </View>
+        
     <View style={styles.btnDiv}>
-    <TouchableOpacity onPress={SignUpPublic}><Ionicons name="md-checkmark-circle" size={70} color="green" /></TouchableOpacity>
+    <TouchableOpacity onPress={signUpFunc}><Ionicons name="md-checkmark-circle" size={70} color="green" /></TouchableOpacity>
     </View>
     </View>
       

@@ -25,9 +25,9 @@ export default function CnicPick2() {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="upload cnic back picture" onPress={pickImage} />
-      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+    <View>
+      <Button title="cnic back" onPress={pickImage} />
+      
     </View>
   );
 }

@@ -13,6 +13,9 @@ import Pending from '../Screens/pending/pending';
 import Approved from '../Screens/approved/approved';
 import BranchManager from '../Screens/branch-manager/branch-manager';
 import Logout from '../Screens/logout/logout';
+import LocationMapComp from '../components/maps/location';
+import SerialNumber from '../Screens/serial-number/serial-number';
+import QrCode from '../Screens/qr-code/qr-code';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -37,6 +40,7 @@ function App() {
           let approvedApplications = doc(db,"approvedApplications" , user.uid)
           let getApprovation = await getDoc(approvedApplications);
           dispatch({type : "ApprovedApplication" , payload : getApprovation.data()})
+          console.log(getApplication.data())
 
         } catch (error) {
           console.log(error, "error")
@@ -50,29 +54,32 @@ function App() {
   },[])
   return (
     <NavigationContainer>
-      {/* <Stack.Navigator>
-        <Stack.Screen name="logout" component={Login} />
-      </Stack.Navigator> */}
       <Drawer.Navigator>
       {
         userData ? (
           <>
          {
            state.activeUser.role === "public" ? (
-            state.approvedApplications ? (
+            state.approvedApplications  ? (
               <>
               <Drawer.Screen name="Approved" component={Approved} />
               <Drawer.Screen name="logout" component={Logout} />
               </>
             ) : (
               <>
-              <Drawer.Screen name="pending" component={Pending} />
+              <Drawer.Screen name="Home" component={MainHome} />
+              <Drawer.Screen name="location" component={LocationMapComp} />
+              <Drawer.Screen name="Approved" component={Approved} />
               <Drawer.Screen name="logout" component={Logout} />
+              
+              
               </>
             )
            ) : (
              <>
                 <Drawer.Screen name="branchManager" component={BranchManager} />
+                <Drawer.Screen name="serialNumber" component={SerialNumber} />
+                <Drawer.Screen name="QrCode" component={QrCode} />
                 <Drawer.Screen name="logout" component={Logout} />
                 
              </>

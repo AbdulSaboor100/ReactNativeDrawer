@@ -1,27 +1,26 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View ,Text , ScrollView} from 'react-native';
+import { State } from 'react-native-gesture-handler';
+import { GlobalContext } from '../../context/context';
 
 const Approved = () => {
+    let {state,dispatch} = useContext(GlobalContext)
+    useEffect(()=>{
+        console.log(new Date(state.publicApplications.createdAt.seconds))
+    },[])
     return (
         <ScrollView>
             <View>
                 <Text>Khana Sab Ke Liye</Text>
             </View>
             <View>
-                <Text>Father Name</Text><Text>{}</Text>
+                <Text>Father Name : {state.publicApplications.fatherName}</Text>
             </View>
             <View>
-                <Text>Cnic No</Text><Text>{}</Text>
+                <Text>Cnic No : {state.publicApplications.cnic}</Text>
             </View>
-            <View>
-                <Text>Contact No</Text><Text>{}</Text>
-            </View>
-            <View>
-                <Text>Date of Issue</Text><Text>{}</Text>
-            </View>
-            <View>
-                <Text>Date Of Expiry</Text><Text>{}</Text>
-            </View>
+           
+           
         </ScrollView>
     )
 }

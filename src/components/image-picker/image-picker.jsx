@@ -25,9 +25,9 @@ export default function ImagePickerExample() {
   };
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="upload applicant image" onPress={pickImage} />
-      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+    <View>
+      <Button title="upload image" onPress={pickImage} />
+      {/* {image} */}
     </View>
   );
 }

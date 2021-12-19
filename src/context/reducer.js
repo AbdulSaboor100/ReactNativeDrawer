@@ -49,6 +49,26 @@ export function reducer(state, action) {
                 stateChange : action.payload
             }
         }
+        case "LATITUDE": {
+            console.log(action.payload)
+            return {
+                ...state,
+                latitude : action.payload
+            }
+        }
+        case "LONGITUDE": {
+            console.log(action.payload)
+            return {
+                ...state,
+                longitude : action.payload
+            }
+        }
+        case "NEARESTONE": {
+            return {
+                ...state,
+                nearestOne : action.payload
+            }
+        }
 
         default:
             return state;
