@@ -16,21 +16,27 @@ const Logout = ({navigation}) => {
     }
     return (
         <View style={styles.logout_div}>
-            <View>
-                <TouchableOpacity onPress={logoutFunc}><Text>Logout</Text></TouchableOpacity>
+            <View style={styles.btn}>
+                <TouchableOpacity onPress={logoutFunc}><Text style={{color :'white'}}>Logout</Text></TouchableOpacity>
             </View>
         </View>
     )
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ 
     logout_div : {
         flex :1,
         width:"100%",
         justifyContent : 'center',
         alignItems : 'center',
         height:"100%",
-    }
+    },
+    btn: {
+        backgroundColor :'green',
+        padding:10,
+        paddingLeft: 20 ,
+        paddingRight: 20,
+    },
 })
 
 export default Logout

@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, Image, View, Platform } from 'react-native';
+import { Button, Image, View, Platform ,Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { GlobalContext } from '../../context/context';
+import { AntDesign } from '@expo/vector-icons'; 
 
 export default function ImagePickerExample() {
     let {state , dispatch} = useContext(GlobalContext);
@@ -25,9 +26,11 @@ export default function ImagePickerExample() {
   };
 
   return (
-    <View>
-      <Button title="upload image" onPress={pickImage} />
-      {/* {image} */}
+    <View style={{width:'100%',display:'flex', flexDirection:'row' ,alignItems : 'center' , justifyContent : 'flex-start' }}>
+      <AntDesign name="clouduploado" size={25}  color="black" onPress={pickImage} > 
+      
+      </AntDesign>
+      <Text style={{fontSize : 15 , marginLeft :10}}>Upload Profile Pic</Text>
     </View>
   );
 }

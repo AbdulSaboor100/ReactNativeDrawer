@@ -67,11 +67,21 @@ function App() {
               </>
             ) : (
               <>
-              <Drawer.Screen name="Home" component={MainHome} />
-              <Drawer.Screen name="location" component={LocationMapComp} />
-              <Drawer.Screen name="Approved" component={Approved} />
-              <Drawer.Screen name="logout" component={Logout} />
-              
+              {
+                state.publicApplications ? (
+                  <>
+                    <Drawer.Screen name="Approved" component={Approved} />
+                    <Drawer.Screen name="logout" component={Logout} />  
+                  </>
+                ) : (
+                  <>
+                    <Drawer.Screen name="Home" component={MainHome} />
+                    <Drawer.Screen name="Locations" component={LocationMapComp} />  
+                     <Drawer.Screen name="logout" component={Logout} />  
+                  </>
+                )
+              }
+                  
               
               </>
             )

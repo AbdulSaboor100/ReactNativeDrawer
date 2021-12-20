@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, Image, View, Platform } from 'react-native';
+import { Button, Image, View, Platform, Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { GlobalContext } from '../../context/context';
+import { AntDesign } from '@expo/vector-icons'; 
 
 export default function CnicPick2() {
     let {state , dispatch} = useContext(GlobalContext)
@@ -25,8 +26,10 @@ export default function CnicPick2() {
   };
 
   return (
-    <View>
-      <Button title="cnic back" onPress={pickImage} />
+    <View style={{width:'100%',display:'flex', flexDirection:'row' ,alignItems : 'center' , justifyContent : 'flex-start' }}>
+      <AntDesign name="clouduploado" size={24} color="black" onPress={pickImage} >
+      </AntDesign>
+      <Text style={{fontSize : 15 , marginLeft :10}}>Upload Your Cnic Back Pic</Text>
       
     </View>
   );

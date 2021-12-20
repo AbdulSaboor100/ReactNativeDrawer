@@ -64,11 +64,25 @@ export function reducer(state, action) {
             }
         }
         case "NEARESTONE": {
+            console.log(action.payload)
             return {
                 ...state,
                 nearestOne : action.payload
             }
         }
+        case "CURRENTDATEPICKER": {
+            return {
+                ...state,
+                currentDatePicker : action.payload
+            }
+        }
+        case "TYPE": {
+            return {
+                ...state,
+                type : action.payload
+            }
+        }
+
 
         default:
             return state;
