@@ -14,7 +14,11 @@ const QrCode = () => {
     let {state , dispatch} = useContext(GlobalContext);
     let [codeState , setCodeState] = useState('hello');
     useEffect(()=>{
+      if(state.approvedApplication.status === "approved"){
         setCodeState(state.approvedApplication.approvedObj.uid)
+      }else{
+        setCodeState(state.approvedApplication.rejectObj.uid)
+      }
     },[])
     return (
         <View style={styles.container}>

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View , Text , StyleSheet ,TextInput , Image , TouchableOpacity} from 'react-native';
+import { View , Text , StyleSheet ,TextInput , Image , TouchableOpacity ,ActivityIndicator, Alert} from 'react-native';
 import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
 import { auth  ,signInWithEmailAndPassword} from '../../configs/firebase';
 import LogoKhanaSabkliye from '../../images/LogoKhanaSabkliye.png';
@@ -11,17 +11,32 @@ const MainLogin = ({navigation}) => {
       });
     let [email , setEmail] = useState('');
     let [password , setPassword] = useState('');
+    let [activity , setActivity] = useState(false)
+    let [error , setError] = useState(false)
     async function loginFunc(){
         try {
+            setActivity(true)
             let {user} = await signInWithEmailAndPassword(auth,email ,password)
             if(user){
                 navigation.navigate("home")
             }
         } catch (error) {
+            setActivity(false)
+            setError(true)
             console.log("error : " , error)
         }
     }
     return (
+        <>
+         {
+            error === true ? (
+                Alert.alert("message" , "Wrong Email Or Password"),
+                setError(false)
+                
+            ) : (
+                null
+            )
+        }
         <View style={styles.container}>
             <View style={styles.view3}>
                 <Image source={LogoKhanaSabkliye} style={styles.img} />
@@ -33,9 +48,16 @@ const MainLogin = ({navigation}) => {
                 <TextInput placeholder="Password" secureTextEntry={true} style={styles.input} value={password} onChangeText={(e)=>{setPassword(e)}}  />
             </View>
         <View style={styles.btnDiv}>
-        <TouchableOpacity onPress={loginFunc}><Entypo name="login" size={70} color="green" /></TouchableOpacity>
+        {
+            activity === true  ? (
+                <ActivityIndicator size="large" color="#89c343" />
+            ) : (
+                <TouchableOpacity onPress={loginFunc}><Entypo name="login" size={70} color="green" /></TouchableOpacity>
+            )
+        }
         </View>
         </View>
+        </>
     )
 }
 
@@ -81,69 +103,11 @@ const styles = StyleSheet.create({
     },
     btnDiv : {
         position : 'relative',
-        top : 150,
-        left : 110,
+        top : 80,
+        left : 100,
     },
 
 
-})
-
-// const styles = StyleSheet.create({
-//     view1 : {
-//         paddingTop : 10,
-//         backgroundColor : 'white',
-//         paddingLeft: 10,
-//         paddingRight:10,
-//         borderTopEndRadius:10,
-//         paddingBottom: 10,
-//         borderTopStartRadius:10,
-//     },
-//     view2 : {
-//         backgroundColor : 'white',
-//         paddingLeft: 10,
-//         paddingRight:10,
-//         // paddingTop:10,
-//         // paddingBottom:10,
-//     },
-
-//     input: {
-//       height: 40,
-//       margin: 12,
-//       borderWidth: 1,
-//       borderColor : 'rgb(195, 195, 195)',
-//       padding: 10,
-//       borderRadius : 5,
-
-//     //   backgroundColor : '#ffffff'
-//     },
-//     container :{
-//         flex:1,
-//         justifyContent : "center",
-//         alignItems : 'center',
-//         fontFamily : 'Inter_400Black',
-//         width : '100%',
-//         height : '100%',
-//         backgroundColor: "#dedfe0", 
-//     },
-//     btnDiv : {
-//         // paddingTop:9,
-//         paddingLeft: 21,
-//         paddingRight : 21,
-//         paddingBottom : 25,
-//         backgroundColor : 'white',
-//         borderBottomEndRadius: 10,
-//         borderBottomStartRadius :10,
-//     },
-//     touchableBtn: {
-//         // height: '3rem',
-//         // width : '10rem'
-//         paddingTop: 10,
-//         paddingBottom : 10,
-//         paddingLeft : 90,
-//         backgroundColor : 'black',
-
-//         paddingRight: 90,
-//     }
-//   });
+});
 
 export default MainLogin;

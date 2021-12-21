@@ -12,10 +12,10 @@ const BranchManager = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={{marginBottom:40}}>
-                <TouchableOpacity onPress={verifyFromSN}><Text>Verify From Serial Number</Text></TouchableOpacity>
+                <TouchableOpacity  onPress={verifyFromSN}><Text style={{fontSize:18 , backgroundColor:'#89c343' ,color:'white',padding:20 ,fontWeight:'bold'}}>Verify From Serial No</Text></TouchableOpacity>
             </View>
             <View>
-                <TouchableOpacity onPress={verifyFromQR}><Text>Verify From Qr Code</Text></TouchableOpacity>
+                <TouchableOpacity onPress={verifyFromQR}><Text style={{fontSize:18 , backgroundColor:'#89c343' ,color:'white',padding:20 ,fontWeight:'bold'}}>Verify From Qr Code</Text></TouchableOpacity>
             </View>
         </View>
     )
@@ -23,6 +23,7 @@ const BranchManager = ({navigation}) => {
 
 const styles = StyleSheet.create({
     container : {
+        backgroundColor: "#ffffff" ,
         flex : 1,
         justifyContent:'center',
         alignItems:'center'

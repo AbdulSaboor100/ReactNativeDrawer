@@ -171,6 +171,9 @@ const MainHome = ({ navigation }) => {
         <View style={styles.view3}>
           <Image source={LogoKhanaSabkliye} style={styles.img} />
         </View>
+        <View style={styles.app}>
+          <Text style={{fontSize:25,fontWeight:'bold', color:'#89c343'}}>Application</Text>
+        </View>
         <View style={styles.view1}>
           <TextInput
             onChangeText={(e) => {
@@ -287,6 +290,15 @@ const MainHome = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  app : {
+    width: 274,
+    height: 50,
+    padding: 10,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    flexDirection:'row',
+    backgroundColor: "#ffffff",
+  },
   view3: {
     backgroundColor: "#ffffff",
     paddingTop: 10,
@@ -375,7 +387,7 @@ const styles = StyleSheet.create({
 
   touchBtn: {
     color: "white",
-    backgroundColor :'green',
+    backgroundColor :'#89c343',
     display:'flex',
     justifyContent:'center',
     alignItems:'center',

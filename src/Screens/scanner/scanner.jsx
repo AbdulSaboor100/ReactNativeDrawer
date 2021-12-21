@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Text, View, StyleSheet, Button  } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { GlobalContext } from '../../context/context';
+import { db , getDoc , doc  } from '../../configs/firebase';
 
 export default function Scanner() {
   let {state , dispatch} = useContext(GlobalContext)
@@ -17,19 +18,21 @@ export default function Scanner() {
 
 
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
-    state.allApprovedApplications.map((item,index)=>{
-        if(item.approvedObj.uid === data){
-            console.log(data)
-            alert("Verified" , item.approvedObj.uid === data);
-        }else{
-            console.log("Not Verified")
-        }
-    })
-    
+    let verifyRef = doc(db, "approvedApplications" , data);
+    let verifyData = await getDoc(verifyRef)
+    if(verifyData.data().status === "approved"){
+      alert(verifyData.data().status)
+    }else{
+      alert("rejected")
+    }
    
   };
+
+  useEffect(()=>{
+
+  },[])
 
   if (hasPermission === null) {
     return <Text>Requesting for camera permission</Text>;

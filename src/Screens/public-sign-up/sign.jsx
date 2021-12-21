@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { View , Text , StyleSheet ,TextInput , TouchableOpacity , Image} from 'react-native';
+import { View , Text , StyleSheet ,TextInput , TouchableOpacity , Image, Alert ,ActivityIndicator} from 'react-native';
 import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
 import { auth , createUserWithEmailAndPassword ,db ,setDoc, doc } from '../../configs/firebase';
 import LogoKhanaSabkliye from '../../images/LogoKhanaSabkliye.png';
 import { Ionicons } from '@expo/vector-icons';
 
 const SignUpPublic = ({navigation}) => {
+    let [activity , setActivity] = useState(false)
+    let [error , setError] = useState(false)
     let [fontsLoaded] = useFonts({
         Inter_900Black,
       });
@@ -15,8 +17,10 @@ const SignUpPublic = ({navigation}) => {
     let [name , setName] = useState('');
     async function signUpFunc(){
         try {
+            setActivity(true)
             let {user} = await createUserWithEmailAndPassword(auth, email , password)
             if(user){
+                
                 let userObj = {
                     name,
                     age,
@@ -28,15 +32,28 @@ const SignUpPublic = ({navigation}) => {
                 }
                 let dataRef = doc(db , "users" , user.uid)
                 let savedData = await setDoc(dataRef, userObj) 
+                
                 navigation.navigate("home")
 
             }
         } catch (error) {
+            setActivity(false)
+            setError(true)
             console.log("error : " , error)
         }
         
     }
     return (
+        <>
+         {
+            error === true ? (
+                Alert.alert("message" , "Wrong Details"),
+                setError(false)
+                
+            ) : (
+                null
+            )
+        }
         <View style={styles.container}>
         <View style={styles.view3}>
             <Image source={LogoKhanaSabkliye} style={styles.img} />
@@ -53,12 +70,20 @@ const SignUpPublic = ({navigation}) => {
         <View style={styles.view2}>
             <TextInput placeholder="Password" secureTextEntry={true} style={styles.input} value={password} onChangeText={(e)=>{setPassword(e)}}  />
         </View>
+
+        
         
     <View style={styles.btnDiv}>
-    <TouchableOpacity onPress={signUpFunc}><Ionicons name="md-checkmark-circle" size={70} color="green" /></TouchableOpacity>
+        {
+            activity === true  ? (
+                <ActivityIndicator size="large" color="#89c343" />
+            ) : (
+                <TouchableOpacity onPress={signUpFunc}><Ionicons name="md-checkmark-circle" size={70} color="green" /></TouchableOpacity>
+            )
+        }
     </View>
     </View>
-      
+    </>
     )
 }
 
@@ -107,7 +132,7 @@ const styles = StyleSheet.create({
     },
     btnDiv : {
         position : 'relative',
-        top : 150,
+        top : 80,
         left : 110,
     },
 
