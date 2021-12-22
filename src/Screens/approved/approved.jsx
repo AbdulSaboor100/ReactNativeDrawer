@@ -60,8 +60,8 @@ const Approved = () => {
                         </View>
                     )
                 ) : (
-                    <View style={{ flex: 1, justifyContent: 'center', paddingTop: 200, alignItems: 'center', width: '100%', height: '100%' }}>
-                        <Text>Your Application Don't Approved Right Now</Text>
+                    <View style={{ flex: 1, justifyContent: 'center', paddingTop: 200, alignItems: 'center', width: '100%', height: '100%', paddingLeft:10 }}>
+                        <Text style={{fontSize:20 , textAlign:'center', color:'#808080' ,fontWeight:'bold'}}>Your Application Is In Approval Process Right Now</Text>
                     </View>
                 )
             }

@@ -23,7 +23,7 @@ const BranchManager = ({navigation}) => {
 
 const styles = StyleSheet.create({
     container : {
-        backgroundColor: "#ffffff" ,
+        backgroundColor: "#dedfe0" ,
         flex : 1,
         justifyContent:'center',
         alignItems:'center'

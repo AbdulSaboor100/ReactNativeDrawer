@@ -30,13 +30,13 @@ const SerialNumber = () => {
         <View style={styles.container}>
             <TextInput placeholder="Enter Serial Number" style={styles.input} value={serialInp} onChangeText={(e)=>{setSerialInp(e)}}  />
             <View>
-                <Button title='Verify' onPress={verifyNow} />
+                <Button color="#89c343"  title='Verify' onPress={verifyNow} />
             </View>
 
             {
                 serialNum ? (
                     <View style={{marginTop:20}}>
-                        <Button title='Click Here To See The Result' onPress={()=>{Alert.alert("message" , serialNum)}}></Button>
+                        <Button color="#89c343" title='Click Here To See The Result' onPress={()=>{Alert.alert("message" , serialNum)}}></Button>
                     </View>
                 ) : (null)
             }
@@ -46,7 +46,7 @@ const SerialNumber = () => {
 
 const styles = StyleSheet.create({
     container : {
-        backgroundColor: "#ffffff" ,
+        backgroundColor: "#dedfe0" ,
         flex : 1,
         justifyContent:'center',
         alignItems:'center'
